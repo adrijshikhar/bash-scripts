@@ -1,2 +1,4 @@
 .dist
 .vscode
+cloneall.sh
+updateall.sh
