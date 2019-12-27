@@ -1,0 +1,37 @@
+#!/bin/bash
+#requires jq -> http://stedolan.github.io/jq/
+RED='\033[0;31m'
+GREEN='\033[0;32m'  
+NC='\033[0m' # No Color
+if [ $# -eq 0 ]
+then
+    echo "No arguments supplied"
+    exit 1
+fi
+location=${1} #specify the locaiton where you want clone the repos
+type=${2:-public} #specify the type of the repos to be cloned
+user="" #enter your username here
+token="" #enter your user token from github
+organization="" #enter organization name
+
+read -p "Directory speicified to clone repos is $location are you sure?(enter y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cd $location
+    repo_list=$(curl https://api.github.com/orgs/$organization/repos?type=$type\&per_page=1000 -u ${user}:${token}  | jq .[].ssh_url | sed -e 's/^"//'  -e 's/"$//')
+    size=${#repo_list}
+    if [ $size > 0 ]
+    then
+        echo -e "${GREEN}Cloning $type repos${NC}"
+        for repo in $repo_list
+        do
+            echo "Repo found: $repo"
+            git clone $repo
+        done
+    else
+        echo "${RED}No $type repos found${NC}"
+    fi
+else 
+    exit 1
+fi
