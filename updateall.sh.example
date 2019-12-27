@@ -12,7 +12,7 @@ location=${1} #specify the locaiton where you want clone the repos
 type=${2:-public} #specify the type of the repos to be cloned
 user="" #enter your username here
 token="" #enter your user token from github
-organization="" #enter organization name
+organization=${3} #enter organization name or pass as arguement
 
 read -p "Directory speicified to clone repos is $location are you sure?(enter y/n) " -n 1 -r
 echo
