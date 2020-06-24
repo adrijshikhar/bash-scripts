@@ -4,7 +4,7 @@ Bash scripts for all cloning and updating git repos under an organization you ha
 
 To use the scipts, follow the steps :
 
-1. Copy `cloneall.sh.examle` to `cloneall.sh` and `updateall.sh.example` to `updateall.sh`
+1. Copy `cloneall.sh.example` to `cloneall.sh` and `updateall.sh.example` to `updateall.sh`
 2. Enter your username and user token in the bash scripts.
 3. Change the permissions by running
    ```chmod 755 ./cloneall.sh ./updateall.sh```
